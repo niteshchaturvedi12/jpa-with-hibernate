@@ -14,7 +14,7 @@ import java.util.List;
 public class PersonJdbcDao {
     private final JdbcTemplate jdbcTemplate;
 
-    static class PersonRowMapper<T> implements RowMapper<Person> {
+    static class PersonRowMapper implements RowMapper<Person> {
         @Override
         public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
             Person person = new Person();
@@ -30,12 +30,12 @@ public class PersonJdbcDao {
     }
 
     public List<Person> findAll() {
-        return jdbcTemplate.query("select * from person", new PersonRowMapper<>());
+        return jdbcTemplate.query("select * from person", new PersonRowMapper());
     }
 
     public Person findById(Integer id) {
         return jdbcTemplate.queryForObject("select * from person p where p.id=?",
-                new PersonRowMapper<>(), id);
+                new PersonRowMapper(), id);
     }
 
     public List<Person> findByName(String name) {

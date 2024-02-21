@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @SpringBootApplication
 public class JpaWithHibernateApplication implements CommandLineRunner {
 
-    private Logger logger = LoggerFactory.getLogger(JpaWithHibernateApplication.class);
+    private final Logger logger = LoggerFactory.getLogger(JpaWithHibernateApplication.class);
 
 
     @Autowired
@@ -24,7 +24,7 @@ public class JpaWithHibernateApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         personJdbcDao.findAll().forEach(person ->  logger.info(person.toString()));
         logger.info("person with id 10001 is {}", personJdbcDao.findById(10001));
         personJdbcDao.findByName("Nite").forEach(person -> logger.info("name with Nite {}", person));
